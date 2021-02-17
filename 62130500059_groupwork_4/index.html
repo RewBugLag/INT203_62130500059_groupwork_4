@@ -29,17 +29,10 @@
                 placeholder="Please enter text for searching photos">
             <button class="bg-blue-400 text-white py-1 px-6 rounded" v-on:click="toggleSearch">Cancel</button>
         </div>
-        <ul v-for="(cont, index) in searchPicture" v-if="input">
-            <li class="py-4" v-on:click="toggleHeart(index)">
+        <ul v-for="(cont, index) in conts">
+            <li class="py-4">
                 <img class="inline" v-bind:src="cont.image" width="400" height="400">
-                <p class="inline pl-8">{{cont.text}}</p>
-                <i class="material-icons" v-show="cont.heart">favorite</i>
-            </li>
-        </ul>
-        <ul v-for="(cont, index) in conts" v-else>
-            <li class="py-4" v-on:click="toggleHeart(index)">
-                <img class="inline" v-bind:src="cont.image" width="400" height="400">
-                <p class="inline pl-8">{{cont.text}}</p>
+                <p class="inline pl-8" v-on:click="toggleHeart(index)">{{cont.text}}</p>
                 <i class="material-icons" v-show="cont.heart">favorite</i>
             </li>
         </ul>
