@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Vue Js - HelloWorld App</title>
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+
+    <!-- Using via Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- https://tailwindcss.com/docs/installation -->
+
+    <!-- Using Tailwind via CDN -->
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 class="text-xl">Photo Gallery ({{countPhoto}})</h1>
+        <h1 class="text-xl">Liked ({{countHeart}})</h1>
+        <button class="material-icons" v-if="search==false" v-on:click="toggleSearch">search</button>
+        <div class="flex" v-show="search">
+            <input type="text" class="flex-1 border-2 border-blue-2" 
+                v-model="input" @keyup.enter="searchPicture"
+                placeholder="Please enter text for searching photos">
+            <button class="bg-blue-400 text-white py-1 px-6 rounded" v-on:click="toggleSearch">Cancel</button>
+        </div>
+        <ul v-for="(cont, index) in searchPicture" v-if="input">
+            <li class="py-4" v-on:click="toggleHeart(index)">
+                <img class="inline" v-bind:src="cont.image" width="400" height="400">
+                <p class="inline pl-8">{{cont.text}}</p>
+                <i class="material-icons" v-show="cont.heart">favorite</i>
+            </li>
+        </ul>
+        <ul v-for="(cont, index) in conts" v-else>
+            <li class="py-4" v-on:click="toggleHeart(index)">
+                <img class="inline" v-bind:src="cont.image" width="400" height="400">
+                <p class="inline pl-8">{{cont.text}}</p>
+                <i class="material-icons" v-show="cont.heart">favorite</i>
+            </li>
+        </ul>
+    </div>
+    <!-- my main.js -->
+    <script src="./main.js"></script>
+</body>
+</html>
