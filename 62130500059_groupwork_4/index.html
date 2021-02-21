@@ -23,15 +23,22 @@
         <h1 class="text-xl">Photo Gallery ({{countPhoto}})</h1>
         <h1 class="text-xl">Liked ({{countHeart}})</h1>
         <button class="material-icons" v-if="search==false" v-on:click="toggleSearch">search</button>
+
         <div class="flex" v-show="search">
             <input type="text" class="flex-1 border-2 border-blue-2" 
                 v-model="input" @keyup.enter="searchPicture"
                 placeholder="Please enter text for searching photos">
             <button class="bg-blue-400 text-white py-1 px-6 rounded" v-on:click="toggleSearch">Cancel</button>
         </div>
+
+        <div v-show="fullImage" class="bg-black h-1/2 w-1/2 ml-auto mr-auto">
+            <i class="material-icons text-white float-right" v-on:click="fullImage = false">clear</i>
+            <img v-bind:src="conts[index].image" class="h-auto w-auto mr-auto ml-auto"/>
+        </div>
+
         <ul v-for="(cont, index) in conts">
             <li class="py-4">
-                <img class="inline" v-bind:src="cont.image" width="400" height="400">
+                <img class="inline" v-bind:src="cont.image" width="400" height="400" v-on:click="fullImage = true">
                 <p class="inline pl-8" v-on:click="toggleHeart(index)">{{cont.text}}</p>
                 <i class="material-icons" v-show="cont.heart">favorite</i>
             </li>
